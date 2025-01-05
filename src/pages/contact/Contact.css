@@ -1,0 +1,81 @@
+.contact-container {
+    display: flex;
+    background-size: Screen;
+    justify-content: space-between;
+    margin-top: 200px;
+    /* Creates padding between the navbar and content */
+    padding: 20px;
+    background-color: #FF8A80;
+    border-radius: 20px;
+    max-width: 1400px;
+    margin: 150px auto 20px;
+    /* Adjusted to create space at the top */
+    min-height: 60vh;
+    /* Centers the container on the page */
+}
+
+.contact-details,
+.opening-hours {
+    flex: 1;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us {
+    flex: 1.5;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-details h2,
+.opening-hours h2,
+.contact-us h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-details p,
+.opening-hours p,
+.contact-us p {
+    margin: 10px 0;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+

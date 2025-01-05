@@ -1,0 +1,121 @@
+/* Dashboard.css */
+
+/* Dashboard container layout */
+.Dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+}
+
+/* Content area that holds the main image */
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Centers image vertically */
+    padding: 2rem 0;
+}
+
+/* Main section for the image */
+.main-section {
+    max-width: 1000px;
+    width: 90%;
+    /* Responsive scaling */
+    position: relative;
+    text-align: center;
+    /* Centers content */
+}
+
+/* Main image */
+.main-image {
+    display: block;
+    margin: 0 auto;
+    /* Centers image horizontally */
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Bottom navigation bar */
+.navigation-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Each navigation item (clickable) */
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    /* Removes underline from <a> */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.nav-item:hover {
+    transform: scale(1.1);
+    /* Slightly enlarges the item on hover */
+}
+
+/* Larger icons */
+.nav-icon {
+    width: 180px;
+    height: 120px;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #9fe8e2, #98ee99);
+    border-radius: 12px;
+    padding: 10px;
+    object-fit: contain;
+}
+
+/* Navigation labels */
+.nav-item p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Make the nav items scale slightly when hovered */
+.nav-item:hover .nav-icon {
+    background: linear-gradient(135deg, #98ee99, #9fe8e2);
+    /* Color flip on hover */
+}
+
+/* Main section for the image */
+.main-section {
+    max-width: 800px;
+    /* Reduce the max width */
+    width: 80%;
+    /* Ensure it scales within the parent container */
+    position: relative;
+    text-align: center;
+    /* Centers content horizontally */
+    margin: 0 auto;
+    /* Centers the section itself */
+    padding: 1rem 0;
+    /* Reduce vertical spacing */
+}
+
+/* Main image */
+.main-image {
+    width: 100%;
+    /* Keep it responsive */
+    max-height: 400px;
+    /* Limit the vertical space it occupies */
+    height: auto;
+    /* Maintain aspect ratio */
+    border-radius: 12px;
+    /* Optional rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* Shadow for aesthetic */
+}

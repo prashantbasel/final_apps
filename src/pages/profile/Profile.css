@@ -1,0 +1,187 @@
+/* General Body Settings */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f4ec;
+    /* Light beige background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Profile Container */
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem 3rem;
+    /* Adequate padding for spacing */
+    gap: 10rem;
+    max-width: 900px;
+    border-radius: 25px;
+    margin: 10rem auto;
+    margin-left: 20rem;
+    /* Centers the container below navbar */
+    position: relative;
+}
+
+/* Profile Card Styling */
+.profile-card {
+    flex: 1;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: -10rem;
+    /* Shift the profile card slightly to the left */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Avatar and Profile Info */
+.profile-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.avatar-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #6a7cae;
+    /* Blue avatar background */
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.view-profile-link {
+    font-size: 0.9rem;
+    color: #6a7cae;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.view-profile-link:hover {
+    text-decoration: underline;
+}
+
+/* Profile Details */
+.profile-details p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Edit Button */
+.edit-button {
+    background-color: #1a73e8;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    align-self: center;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.edit-button:hover {
+    background-color: #155cbc;
+}
+
+/* Game Status Card */
+.game-status-card {
+    flex: 0.5;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-right: -15rem;
+    /* Shift the game status card slightly to the right */
+    position: relative;
+    /* Ensure the logout button can be positioned */
+}
+
+/* Game Status Title */
+.game-status-card h4 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Dropdown Styling */
+.game-status-dropdown {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #eafbea;
+    /* Light green background */
+    color: #2e7d32;
+    /* Green text color */
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Logout Button */
+.logout-button {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    bottom: 1rem;
+    /* Position at the bottom of the game status card */
+    right: 1rem;
+    /* Position at the right of the game status card */
+}
+
+.logout-button:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        /* Stack items vertically */
+        align-items: center;
+        padding: 2rem 1rem;
+    }
+
+    .profile-card,
+    .game-status-card {
+        width: 100%;
+        margin: 0;
+        /* Remove offsets for smaller screens */
+    }
+
+    .logout-button {
+        position: static;
+        /* Reset positioning for mobile */
+        margin-top: 1rem;
+        width: 100%;
+        /* Full-width button */
+    }
+}

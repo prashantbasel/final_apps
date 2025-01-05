@@ -1,0 +1,74 @@
+.navbar-container {
+    width: 100%;
+}
+
+.navbar {
+    background-color: #010101;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Make the navbar fixed */
+    top: 0; /* Position it at the top of the page */
+    width: 100%; /* Ensure it spans the full width of the page */
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+.navbar-left .location {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-left .location span {
+    font-size: 1em;
+}
+
+.navbar-center .nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-center .nav-item {
+    margin: 0 10px;
+}
+
+.navbar-center .nav-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-center .nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Adjust main content padding to avoid being hidden under the fixed navbar */
+.main-content {
+    padding-top: 70px; /* Adjust this value if your navbar height changes */
+}
+.navbar-right .dropdown-toggle {
+    background-color: rgba(255, 255, 255, 0.8); /* Light background for visibility */
+    color: #333; /* Dark text for contrast */
+    padding: 10px 20px; /* Padding for better touch target and visibility */
+    border-radius: 5px; /* Rounded corners for aesthetic */
+    border: none; /* Removing default border */
+    font-weight: bold; /* Bold font for better visibility */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Subtle text shadow for depth */
+}
+
+.dropdown-menu {
+    border-radius: 5px; /* Consistent rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft box shadow for pop effect */
+    background-color: #f8f9fa; /* Slightly off-white background for dropdown items */
+}
+
+.dropdown-item {
+    color: #333; /* Ensuring readability on lighter background */
+    padding: 8px 20px; /* Adequate padding for clickable area */
+}
+
+.dropdown-item:hover {
+    background-color: #70a5db; /* Light hover effect for interactivity */
+}

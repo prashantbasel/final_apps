@@ -1,0 +1,152 @@
+/* Set the container to take full screen height and width */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.register-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1500px;
+    width: 100%;
+    padding: 50px;
+    text-align: left;
+}
+
+.register-box {
+    background-color: #CDD3D8;
+    padding: 40px; /* Reduced padding to make it shorter */
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #baad80, #a0d6de);
+    max-width: 500px;
+    width: 100%;
+    margin-right: 40px;
+}
+
+.register-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 5px; /* Reduced margin for closer spacing */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px; /* Slightly reduced padding */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.register-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px; /* Reduced bottom margin */
+}
+
+.register-button:hover {
+    background-color: #0056b3;
+}
+
+.image-container {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive adjustments for register page */
+@media (max-width: 1200px) {
+    .register-content {
+        flex-direction: column;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .register-box {
+        max-width: 400px;
+        padding: 30px; /* Further reduced padding for smaller screens */
+        margin-right: 0;
+    }
+
+    .register-box h2 {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+
+    .input-group input {
+        padding: 10px;
+    }
+
+    .register-button {
+        padding: 10px;
+    }
+
+    .image-container {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .register-content {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .register-box {
+        max-width: 300px;
+        padding: 20px; /* Reduced padding for small screens */
+        margin-right: 0;
+    }
+
+    .register-box h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .input-group input {
+        padding: 8px;
+    }
+
+    .register-button {
+        padding: 8px;
+    }
+
+    .image-container {
+        max-width: 300px;
+    }
+    
+}

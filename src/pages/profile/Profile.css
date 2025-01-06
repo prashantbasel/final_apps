@@ -132,12 +132,24 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Dropdown Green for "I’m In" */
+.game-status-dropdown.in {
     background-color: #eafbea;
     /* Light green background */
     color: #2e7d32;
     /* Green text color */
-    text-align: center;
-    margin-bottom: 1.5rem;
+}
+
+/* Dropdown Red for "I’m Out" */
+.game-status-dropdown.out {
+    background-color: #fdecea;
+    /* Light red background */
+    color: #d32f2f;
+    /* Red text color */
 }
 
 /* Logout Button */
@@ -177,11 +189,5 @@ body {
         /* Remove offsets for smaller screens */
     }
 
-    .logout-button {
-        position: static;
-        /* Reset positioning for mobile */
-        margin-top: 1rem;
-        width: 100%;
-        /* Full-width button */
-    }
+    
 }

@@ -16,12 +16,12 @@ const Navbar = () => {
     return (
         <div className='navbar-container'>
             <nav className="navbar">
-            <div className="navbar-left">
-                   
-                    <img 
-                        src="/assets/icons/logo.png" 
-                        alt="Kickoff Logo" 
-                        className="navbar-logo" 
+                <div className="navbar-left">
+
+                    <img
+                        src="/assets/icons/logo.png"
+                        alt="Kickoff Logo"
+                        className="navbar-logo"
                     />
                 </div>
                 <div className="navbar-center">
@@ -37,7 +37,7 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item">
                             <Link to="/profile" className="nav-link">User Profile</Link>
-                        </li>
+                        </li>         
                     </ul>
                 </div>
                 <div className="navbar-right">

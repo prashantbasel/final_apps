@@ -28,6 +28,7 @@ import Add from "./pages/admin/admin_dashboard/Add";
 import Services from "./pages/services/Services";
 import AdminRoutes from "./protected_routes/AdminRoutes";
 import UserRoutes from "./protected_routes/UserRoutes";
+import DailyGame from "./pages/daily_games/DailyGames";
 
 // import AdminDashboard from "./pages/admin/admin_dashboard/AdminDashboard";
 
@@ -67,6 +68,8 @@ function App() {
                     <Route path="/appointment" element={<Appointment />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/forgot_password" element={<ForgotPassword />} />
+                    <Route path="/daily-games" element={<DailyGame />} />
+                    
 
 
 

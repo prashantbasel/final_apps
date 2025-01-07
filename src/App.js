@@ -25,10 +25,12 @@ import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 
 import Add from "./pages/admin/admin_dashboard/Add";
+import DailyGame from "./pages/daily_games/DailyGames";
+import Friend from "./pages/friends/Friends";
+import Myteam from "./pages/my_team/MyTeam";
 import Services from "./pages/services/Services";
 import AdminRoutes from "./protected_routes/AdminRoutes";
 import UserRoutes from "./protected_routes/UserRoutes";
-import DailyGame from "./pages/daily_games/DailyGames";
 
 // import AdminDashboard from "./pages/admin/admin_dashboard/AdminDashboard";
 
@@ -69,7 +71,10 @@ function App() {
                     <Route path="/services" element={<Services />} />
                     <Route path="/forgot_password" element={<ForgotPassword />} />
                     <Route path="/daily-games" element={<DailyGame />} />
-                    
+                    <Route path="/my-team" element={<Myteam />} />
+                    <Route path="/friends" element={<Friend />} />
+
+
 
 
 

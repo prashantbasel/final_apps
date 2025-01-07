@@ -1,4 +1,3 @@
-// ViewBooking.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,12 +9,17 @@ const ViewBooking = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getAllBookings().then((res) => {
-            setBookings(res.data.bookings);
-        }).catch((error) => {
-            console.error(error);
-            toast.error("Failed to fetch bookings: " + (error.response?.data.message || "Server error"));
-        });
+        getAllBookings()
+            .then((res) => {
+                setBookings(res.data.bookings);
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error(
+                    'Failed to fetch bookings: ' +
+                        (error.response?.data.message || 'Server error')
+                );
+            });
     }, []);
 
     const formatDate = (dateString) => {
@@ -24,29 +28,34 @@ const ViewBooking = () => {
     };
 
     return (
-        <div className='booking-container'>
+        <div className="booking-container">
             <h3>View Bookings</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Bike Number</th>
-                        <th>Description</th>
+                        <th>Name</th>
+                        <th>Contact Number</th>
                         <th>Booking Date</th>
                         <th>Booking Time</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {bookings.map(booking => (
+                    {bookings.map((booking) => (
                         <tr key={booking._id}>
+                            <td>{booking.contactNumber}</td>
                             <td>{booking.bikeNumber}</td>
-                            <td>{booking.description}</td>
                             <td>{formatDate(booking.bookingDate)}</td>
                             <td>{booking.bookingTime}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <button className='back-btn' onClick={() => navigate('/admin/dashboard')}>Back to Dashboard</button>
+            <button
+                className="back-btn"
+                onClick={() => navigate('/admin/dashboard')}
+            >
+                Back to Dashboard
+            </button>
         </div>
     );
 };

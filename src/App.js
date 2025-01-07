@@ -20,7 +20,7 @@ import UpdateProducts from "./pages/admin/update_product/UpdateProduct";
 import ViewBooking from "./pages/admin/view_booking/ViewBooking";
 import ViewContact from "./pages/admin/view_contact/ViewContact";
 import Appointment from "./pages/appointment/Appointment";
-import Booking from "./pages/booking/Booking";
+
 import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 
@@ -63,11 +63,11 @@ function App() {
 
                     <Route path='/profile' element={<Profile />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/booking" element={<Booking />} />
+                    <Route path="/booking" element={<Appointment />} />
                     <Route path="/contact" element={<Contact />} />
 
                     <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/appointment" element={<Appointment />} />
+
                     <Route path="/services" element={<Services />} />
                     <Route path="/forgot_password" element={<ForgotPassword />} />
                     <Route path="/daily-games" element={<DailyGame />} />

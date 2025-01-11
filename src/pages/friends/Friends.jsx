@@ -27,6 +27,9 @@ const Friends = () => {
                     }
                 );
                 setFriends(friendsResponse.data.friends);
+
+                // Save the friends list to localStorage
+                localStorage.setItem("friends", JSON.stringify(friendsResponse.data.friends));
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -115,6 +118,10 @@ const Friends = () => {
             );
             alert("Friend removed successfully!");
             setFriends((prev) => prev.filter((friend) => friend.id !== friendId && friend._id !== friendId));
+
+            // Update localStorage after removing the friend
+            // const updatedFriends = friends.filter((friend) => friend.id !== friendId && friend._id !== friendId);
+            // localStorage.setItem("friends", JSON.stringify(updatedFriends));
         } catch (error) {
             console.error("Error removing friend:", error);
         }
@@ -216,4 +223,3 @@ const Friends = () => {
 };
 
 export default Friends;
-    

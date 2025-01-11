@@ -1,175 +1,92 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import './Services.css';
-import KhaltiCheckout from "khalti-checkout-web";
+import KhaltiCheckout from 'khalti-checkout-web';
 import config from '../../components/khaltiConfig';
 
 const Services = () => {
-    const [detailedServiceSelected, setDetailedServiceSelected] = useState(true);
-    const [normalServiceSelected, setNormalServiceSelected] = useState(false);
-    const [detailedServices, setDetailedServices] = useState({
-        engineOil: true,
-        airFilter: true,
-        movieFilter: true,
-        laborCost: true,
-    });
-    const [normalServices, setNormalServices] = useState({
-        engineOil: true,
-        airFilter: true,
-        movieFilter: true,
-        laborCost: true,
-    });
-    const [showModal, setShowModal] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { name, phone, date, time } = location.state || {};
+    const [fromTime, toTime] = time ? time.split(' - ') : [];
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    const prices = {
-        engineOil: 1100,
-        airFilter: 500,
-        movieFilter: 400,
-        laborCost: 1000,
-    };
+    const priceRanges = [
+        { range: [6, 10], price: 1000 },
+        { range: [10, 18], price: 1200 },
+        { range: [18, 21], price: 1500 },
+    ];
 
     const calculateTotalPrice = () => {
+        if (!fromTime || !toTime) return 0;
+
+        const fromHour =
+            parseInt(fromTime.split(':')[0]) +
+            (fromTime.includes('pm') && fromTime.split(':')[0] !== '12' ? 12 : 0);
+        const toHour =
+            parseInt(toTime.split(':')[0]) +
+            (toTime.includes('pm') && toTime.split(':')[0] !== '12' ? 12 : 0);
+
         let total = 0;
-        if (detailedServiceSelected) {
-            total = Object.keys(detailedServices).reduce((acc, service) => {
-                return acc + (detailedServices[service] ? prices[service] : 0);
-            }, 0);
-        } else {
-            total = Object.keys(normalServices).reduce((acc, service) => {
-                return acc + (normalServices[service] ? prices[service] : 0);
-            }, 0);
+
+        for (let hour = fromHour; hour < toHour; hour++) {
+            for (const range of priceRanges) {
+                if (hour >= range.range[0] && hour < range.range[1]) {
+                    total += range.price;
+                }
+            }
         }
+
         return total;
     };
 
-    const handleServiceSelection = (type, service) => {
-        if (type === 'detailed') {
-            setDetailedServices({
-                ...detailedServices,
-                [service]: !detailedServices[service],
-            });
-        } else {
-            setNormalServices({
-                ...normalServices,
-                [service]: !normalServices[service],
-            });
-        }
+    const handleKhaltiPayment = () => {
+        const checkout = new KhaltiCheckout(config);
+        checkout.show({ amount: calculateTotalPrice() * 100 }); // Amount in paisa
     };
 
-    const handleServiceTypeChange = (type) => {
-        if (type === 'detailed') {
-            setDetailedServiceSelected(true);
-            setNormalServiceSelected(false);
-        } else {
-            setDetailedServiceSelected(false);
-            setNormalServiceSelected(true);
-        }
-    };
-
-    const handleNextButtonClick = () => {
-        setShowModal(true);
+    const handlePayOnArrival = () => {
+        setShowSuccessModal(true); // Show success modal
     };
 
     const handleCloseModal = () => {
-        setShowModal(false);
+        setShowSuccessModal(false);
+        navigate('/dashboard'); // Navigate to the dashboard
     };
-
-    const handleKhaltiPayment = () => {
-        let checkout = new KhaltiCheckout(config);
-        checkout.show({amount: 200})
-    }
-     
 
     return (
         <div className="services-page">
-            <div className="navbar-wrapper">
-                <Navbar />
-            </div>
-            <div className="services-container">
-                <h2 className="services-header">SELECT SERVICES</h2>
-                <div className={`service-option ${detailedServiceSelected ? 'selected' : ''}`} onClick={() => handleServiceTypeChange('detailed')}>
-                    <div className="service-header">
-                        <span>Detailed Servicing</span>
-                        <span>2 Hrs</span>
-                        <div className="price-list">NPR 3000</div>
-                    </div>
-                    <div className="service-content">
-                        <div className="service-item">
-                            <div className="service-details">
-                                <span>Engine Oil</span>
-                                <span>Air Filter</span>
-                                <span>Movie Filter</span>
-                                <span>Labor Cost</span>
-                            </div>
-                            <div className="service-prices">
-                                <span>NPR {prices.engineOil}</span>
-                                <span>NPR {prices.airFilter}</span>
-                                <span>NPR {prices.movieFilter}</span>
-                                <span>NPR {prices.laborCost}</span>
-                            </div>
-                            <div className="service-checkboxes">
-                                {Object.keys(detailedServices).map(service => (
-                                    <input
-                                        key={service}
-                                        type="checkbox"
-                                        checked={detailedServices[service]}
-                                        onChange={() => handleServiceSelection('detailed', service)}
-                                        disabled={!detailedServiceSelected}
-                                    />
-                                ))}
-                            </div>
-                        </div>
+            <Navbar />
+            <div className="container">
+                <div className="booking-details">
+                    <h2>Booking Details</h2>
+                    <p><strong>Name:</strong> {name || 'N/A'}</p>
+                    <p><strong>Phone Number:</strong> {phone || 'N/A'}</p>
+                    <p><strong>Date:</strong> {date || 'N/A'}</p>
+                    <p><strong>Time:</strong> {time || 'N/A'}</p>
+                    <p><strong>Total Amount:</strong> <span>{calculateTotalPrice()} NPR</span></p>
+                    <div className="payment-buttons">
+                        <button className="pay-online" onClick={handleKhaltiPayment}>Pay Online</button>
                     </div>
                 </div>
-                <div className={`service-option ${normalServiceSelected ? 'selected' : ''}`} onClick={() => handleServiceTypeChange('normal')}>
-                    <div className="service-header">
-                        <span>Normal Servicing</span>
-                        <span>2 Hrs</span>
-                        <div className="price-list">NPR 2500</div>
+                <div className="price-range-container">
+                    <div className="price-range">
+                        <h3>Price Range</h3>
+                        <p>6:00 am - 10:00 am: <span>1000 NPR</span></p>
+                        <p>10:00 am - 6:00 pm: <span>1200 NPR</span></p>
+                        <p>6:00 pm - 9:00 pm: <span>1500 NPR</span></p>
                     </div>
-                    <div className="service-content">
-                        <div className="service-item">
-                            <div className="service-details">
-                                <span>Engine Oil</span>
-                                <span>Air Filter</span>
-                                <span>Movie Filter</span>
-                                <span>Labor Cost</span>
-                            </div>
-                            <div className="service-prices">
-                                <span>NPR {prices.engineOil}</span>
-                                <span>NPR {prices.airFilter}</span>
-                                <span>NPR {prices.movieFilter}</span>
-                                <span>NPR {prices.laborCost}</span>
-                            </div>
-                            <div className="service-checkboxes">
-                                {Object.keys(normalServices).map(service => (
-                                    <input
-                                        key={service}
-                                        type="checkbox"
-                                        checked={normalServices[service]}
-                                        onChange={() => handleServiceSelection('normal', service)}
-                                        disabled={!normalServiceSelected}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                    <button className="pay-arrival" onClick={handlePayOnArrival}>Pay on Arrival</button>
                 </div>
-                <div className="total-price">
-                    Total Price : {calculateTotalPrice()}
-                </div>
-                <button className="next-button" onClick={handleNextButtonClick}>NEXT</button>
             </div>
 
-            {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close-button" onClick={handleCloseModal}>&times;</span>
-                        <h2>Select the payment method:</h2>
-                        <div className="modal-body">
-                            <button className="payment-button">Pay on arrival</button>
-                            <button className="payment-button" onClick={handleKhaltiPayment}>Khalti</button>
-                        </div>
+            {showSuccessModal && (
+                <div className="success-modal" onClick={handleCloseModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="success-icon">✔</div>
+                        <h3>Success</h3>
+                        <p>Booking Successfully</p>
                     </div>
                 </div>
             )}

@@ -98,3 +98,17 @@
     text-align: center;
     font-size: 18px; /* Larger font size for team name */
 }
+.search-results {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add spacing between search results */
+}
+
+.empty-message {
+    font-style: italic;
+    color: #aaa;
+    text-align: center;
+    margin-top: 10px;
+}
+

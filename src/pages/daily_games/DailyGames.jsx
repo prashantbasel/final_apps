@@ -4,11 +4,15 @@ import "./DailyGames.css";
 
 const DailyGames = () => {
     const [searchValue, setSearchValue] = useState("");
-    const [availableTeams, setAvailableTeams] = useState(["TEAM ELECTRO"]);
+    const [availableTeams, setAvailableTeams] = useState(["TEAM ELECTRO", "TEAM BLAZE", "TEAM SPARK", "TEAM THUNDER"]);
+    const [filteredTeams, setFilteredTeams] = useState([]);
     const [myTeam, setMyTeam] = useState("MY TEAM");
 
     const handleSearch = () => {
-        alert(`Search functionality not implemented for "${searchValue}"`);
+        const results = availableTeams.filter((team) =>
+            team.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        setFilteredTeams(results);
     };
 
     const handleSetMatch = (team) => {
@@ -44,6 +48,23 @@ const DailyGames = () => {
                         <button className="button search-button" onClick={handleSearch}>
                             Search
                         </button>
+                        <div className="search-results">
+                            {filteredTeams.length > 0 ? (
+                                filteredTeams.map((team, index) => (
+                                    <div key={index} className="team-item">
+                                        <div className="team-name">{team}</div>
+                                        <button
+                                            className="button set-match-button"
+                                            onClick={() => handleSetMatch(team)}
+                                        >
+                                            Set Match
+                                        </button>
+                                    </div>
+                                ))
+                            ) : searchValue ? (
+                                <div className="empty-message">No teams found</div>
+                            ) : null}
+                        </div>
                     </div>
                 </div>
 

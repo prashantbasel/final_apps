@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import axios from "axios";
 import Navbar from "../../components/Navbar";
 import "./MyTeam.css";
 
@@ -19,8 +20,8 @@ const PlayerCard = ({ player }) => {
             className={`card ${isDragging ? "dragging" : ""}`}
             style={{ opacity: isDragging ? 0.5 : 1 }}
         >
-            <span className="name">{player.name}</span>
-            <span className="phone">{player.phone}</span>
+            <span className="name">{player.name || "No Name"}</span>
+            <span className="phone">{player.phone || "No Phone"}</span>
         </div>
     );
 };
@@ -45,7 +46,7 @@ const Container = ({ title, players, onDrop }) => {
             <div className="section-header">{title}</div>
             {players.length > 0 ? (
                 players.map((player) => (
-                    <PlayerCard key={player.id} player={player} />
+                    <PlayerCard key={player.id || player._id} player={player} />
                 ))
             ) : (
                 <div className="empty-slot">No players assigned</div>
@@ -55,42 +56,47 @@ const Container = ({ title, players, onDrop }) => {
 };
 
 const MyTeam = () => {
-    const [friendsList, setFriendsList] = useState([
-        { id: 1, name: "Prashanna Shah", phone: "9843011181" },
-        { id: 2, name: "Prashant Basel", phone: "9843011182" },
-        { id: 3, name: "Ankit Thapa", phone: "9843011183" },
-        { id: 4, name: "Sujan Shrestha", phone: "9843011184" },
-    ]);
-
+    const [friendsList, setFriendsList] = useState([]);
     const [goalKeeper, setGoalKeeper] = useState([]);
     const [defender, setDefender] = useState([]);
     const [winger, setWinger] = useState([]);
     const [forward, setForward] = useState([]);
 
-    const handleDrop = (role, player) => {
-        const removeFromPrevious = (list, setList) => {
-            setList((prev) => prev.filter((p) => p.id !== player.id));
+    useEffect(() => {
+        const fetchFriends = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:5000/api/user/friends",
+                    {
+                        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+                    }
+                );
+                setFriendsList(response.data.friends);
+            } catch (error) {
+                console.error("Error fetching friends:", error);
+            }
         };
 
-        // Remove player from all containers
-        removeFromPrevious(friendsList, setFriendsList);
-        removeFromPrevious(goalKeeper, setGoalKeeper);
-        removeFromPrevious(defender, setDefender);
-        removeFromPrevious(winger, setWinger);
-        removeFromPrevious(forward, setForward);
+        fetchFriends();
+    }, []);
 
-        // Add player to the target container
-        if (role === "friends") {
-            setFriendsList((prev) => [...prev, player]);
-        } else if (role === "goalkeeper") {
-            setGoalKeeper((prev) => [...prev, player]);
-        } else if (role === "defender") {
-            setDefender((prev) => [...prev, player]);
-        } else if (role === "winger") {
-            setWinger((prev) => [...prev, player]);
-        } else if (role === "forward") {
-            setForward((prev) => [...prev, player]);
+    const handleDrop = (role, player) => {
+        // Add the player to the target role
+        if (role === "goalkeeper" && !goalKeeper.some((p) => p.id === player.id)) {
+            setGoalKeeper([player]);
+        } else if (role === "defender" && !defender.some((p) => p.id === player.id)) {
+            setDefender([player]);
+        } else if (role === "winger" && !winger.some((p) => p.id === player.id)) {
+            setWinger([player]);
+        } else if (role === "forward" && !forward.some((p) => p.id === player.id)) {
+            setForward([player]);
         }
+
+        // Remove the player from other role boxes
+        if (role !== "goalkeeper") setGoalKeeper((prev) => prev.filter((p) => p.id !== player.id));
+        if (role !== "defender") setDefender((prev) => prev.filter((p) => p.id !== player.id));
+        if (role !== "winger") setWinger((prev) => prev.filter((p) => p.id !== player.id));
+        if (role !== "forward") setForward((prev) => prev.filter((p) => p.id !== player.id));
     };
 
     return (
@@ -101,8 +107,14 @@ const MyTeam = () => {
                 <div className="team-sections">
                     <Container
                         title="Friends"
-                        players={friendsList}
-                        onDrop={(player) => handleDrop("friends", player)}
+                        players={friendsList.filter(
+                            (friend) =>
+                                !goalKeeper.some((p) => p.id === friend.id) &&
+                                !defender.some((p) => p.id === friend.id) &&
+                                !winger.some((p) => p.id === friend.id) &&
+                                !forward.some((p) => p.id === friend.id)
+                        )}
+                        onDrop={() => {}}
                     />
                     <div className="role-grid">
                         <Container

@@ -58,7 +58,20 @@ const Appointment = () => {
             .then((res) => {
                 if (res.status === 200) {
                     toast.success(res.data.message);
-                    navigate('/services');
+                    navigate('/services', {
+                        state: {
+                            name: contactNumber,
+                            phone: bikeNumber,
+                            date: formattedDate,
+                            time: `${fromTime} - ${toTime}`,
+                            totalAmount:
+                                fromTime < '10:00 am'
+                                    ? '1000 NPR'
+                                    : fromTime < '6:00 pm'
+                                    ? '1200 NPR'
+                                    : '1500 NPR',
+                        },
+                    });
                 } else {
                     toast.error(res.data.message || 'Failed to add booking');
                 }

@@ -49,7 +49,7 @@ const Dashboard = () => {
                 </Link>
 
                 {/* View Booking */}
-                <Link to="/view-booking" className="nav-item">
+                <Link to="/booking-details" className="nav-item">
                     <img
                         src="/assets/icons/view-booking.png"
                         alt="View Booking"

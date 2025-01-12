@@ -1,0 +1,71 @@
+/* Booking Details Root Class */
+.booking-details {
+    font-family: Arial, sans-serif;
+    background-color: #f9f6f3;
+    
+  }
+  
+  .booking-details__content {
+    margin-top: 150px;
+  }
+  
+  /* Title Styles */
+  .booking-details__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: #555;
+  }
+  
+  /* Table Styles */
+  .booking-details__table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .booking-details__table th,
+  .booking-details__table td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .booking-details__table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .booking-details__table tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  /* Button Styles */
+  .btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn--cancel {
+    background-color: #e74c3c;
+  }
+  
+  .btn--cancel:hover {
+    background-color: #c0392b;
+  }
+  
+  .btn--played {
+    background-color: #27ae60;
+  }
+  
+  .btn--played:hover {
+    background-color: #1e8449;
+  }
+  

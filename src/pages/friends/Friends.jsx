@@ -1,41 +1,37 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./Friends.css";
 import Navbar from "../../components/Navbar";
+import "./Friends.css";
 
 const Friends = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    const [friendRequests, setFriendRequests] = useState([]);
+    const [friendRequests, setFriendRequests] = useState([
+        { id: 1, name: "Prashanna Shah" },
+        { id: 2, name: "Deepak Shrestha" },
+    ]); // Demo friend requests
     const [friends, setFriends] = useState([]);
 
+    // Fetch friends list from server or localStorage on load
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchFriends = async () => {
             try {
-                const friendRequestsResponse = await axios.get(
-                    "http://localhost:5000/api/user/friend-requests",
-                    {
-                        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-                    }
-                );
-                setFriendRequests(friendRequestsResponse.data.friendRequests);
-
                 const friendsResponse = await axios.get(
                     "http://localhost:5000/api/user/friends",
                     {
                         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
                     }
                 );
-                setFriends(friendsResponse.data.friends);
+                setFriends(friendsResponse.data.friends || []);
 
-                // Save the friends list to localStorage
-                localStorage.setItem("friends", JSON.stringify(friendsResponse.data.friends));
+                // Save to localStorage
+                localStorage.setItem("friends", JSON.stringify(friendsResponse.data.friends || []));
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching friends:", error);
             }
         };
 
-        fetchData();
+        fetchFriends();
     }, []);
 
     const handleSearch = async () => {
@@ -58,7 +54,6 @@ const Friends = () => {
     };
 
     const handleAddFriend = async (friendId) => {
-        console.log("Friend ID being sent:", friendId);
         try {
             await axios.post(
                 "http://localhost:5000/api/user/add-friend",
@@ -74,37 +69,22 @@ const Friends = () => {
         }
     };
 
-    const handleAcceptRequest = async (requestId) => {
-        try {
-            await axios.post(
-                "http://localhost:5000/api/user/accept-friend-request",
-                { requestId },
-                {
-                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-                }
-            );
-            alert("Friend request accepted!");
+    const handleAcceptRequest = (requestId) => {
+        // Find the friend request by ID
+        const acceptedFriend = friendRequests.find((req) => req.id === requestId);
+
+        if (acceptedFriend) {
+            // Add to Friends list
+            setFriends((prev) => [...prev, acceptedFriend]);
+
+            // Remove from Friend Requests
             setFriendRequests((prev) => prev.filter((req) => req.id !== requestId));
-            setFriends((prev) => [...prev, { id: requestId }]); // Add to friends list
-        } catch (error) {
-            console.error("Error accepting friend request:", error);
         }
     };
 
-    const handleRejectRequest = async (requestId) => {
-        try {
-            await axios.post(
-                "http://localhost:5000/api/user/reject-friend-request",
-                { requestId },
-                {
-                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-                }
-            );
-            alert("Friend request rejected!");
-            setFriendRequests((prev) => prev.filter((req) => req.id !== requestId));
-        } catch (error) {
-            console.error("Error rejecting friend request:", error);
-        }
+    const handleRejectRequest = (requestId) => {
+        // Remove from Friend Requests
+        setFriendRequests((prev) => prev.filter((req) => req.id !== requestId));
     };
 
     const handleRemoveFriend = async (friendId) => {
@@ -116,12 +96,10 @@ const Friends = () => {
                     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
                 }
             );
-            alert("Friend removed successfully!");
-            setFriends((prev) => prev.filter((friend) => friend.id !== friendId && friend._id !== friendId));
 
-            // Update localStorage after removing the friend
-            // const updatedFriends = friends.filter((friend) => friend.id !== friendId && friend._id !== friendId);
-            // localStorage.setItem("friends", JSON.stringify(updatedFriends));
+            // Remove from Friends list
+            setFriends((prev) => prev.filter((friend) => friend.id !== friendId && friend._id !== friendId));
+            alert("Friend removed successfully!");
         } catch (error) {
             console.error("Error removing friend:", error);
         }
@@ -138,8 +116,6 @@ const Friends = () => {
                     <input
                         type="text"
                         className="search-input"
-                        id="search-player"
-                        name="searchPlayer"
                         placeholder="Enter name or email"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -203,8 +179,7 @@ const Friends = () => {
                     {friends.length > 0 ? (
                         friends.map((friend) => (
                             <div key={friend.id || friend._id} className="friend-card-item">
-                                <span className="friend-name">{friend.name || friend.firstName || "No Name"}</span>
-                                <span className="friend-phone">{friend.phone}</span>
+                                <span className="friend-name">{friend.name}</span>
                                 <button
                                     className="remove-friend-button"
                                     onClick={() => handleRemoveFriend(friend.id || friend._id)}

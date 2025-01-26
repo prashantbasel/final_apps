@@ -112,3 +112,244 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.save-section {
+    margin-bottom:10px;
+    text-align: left;
+}
+
+/* Save Button Styling */
+.save-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+/* Success Popup Styling */
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d4edda;
+    border: 2px solid #c3e6cb;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-icon {
+    font-size: 50px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.popup-content h2 {
+    font-size: 20px;
+    color: #155724;
+    margin-bottom: 10px;
+}
+
+.popup-content p {
+    font-size: 16px;
+    color: #155724;
+}
+/* Player card styling */
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Availability dot styling */
+.availability-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.availability-dot.green {
+    background-color: #28a745; /* Green for available */
+}
+
+.availability-dot.red {
+    background-color: #dc3545; /* Red for unavailable */
+}
+
+/* Save Button Styling */
+.save-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+/* Success Popup Styling */
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d4edda;
+    border: 2px solid #c3e6cb;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-icon {
+    font-size: 50px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.popup-content h2 {
+    font-size: 20px;
+    color: #155724;
+    margin-bottom: 10px;
+}
+
+.popup-content p {
+    font-size: 16px;
+    color: #155724;
+}
+/* Player card styling */
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+/* Avatar styling */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+/* Name and availability styling */
+.player-details {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Availability dot styling */
+.availability-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.availability-dot.green {
+    background-color: #28a745; /* Green for available */
+}
+
+.availability-dot.red {
+    background-color: #dc3545; /* Red for unavailable */
+}
+
+/* Save Button Styling */
+.save-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+/* Success Popup Styling */
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d4edda;
+    border: 2px solid #c3e6cb;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-icon {
+    font-size: 50px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.popup-content h2 {
+    font-size: 20px;
+    color: #155724;
+    margin-bottom: 10px;
+}
+
+.popup-content p {
+    font-size: 16px;
+    color: #155724;
+}

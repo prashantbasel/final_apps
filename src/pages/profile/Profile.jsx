@@ -1,3 +1,4 @@
+// Profile.jsx
 import React, { useState, useEffect } from "react";
 import { getUserProfileApi, updateUserProfileApi } from "../../apis/Api";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,7 +14,7 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
   const [gameStatus, setGameStatus] = useState(
-    localStorage.getItem("gameStatus") || "in" // Default to "I'm In" if nothing is saved
+    localStorage.getItem("gameStatus") || "in" // Default to "I’m In" if nothing is saved
   );
 
   useEffect(() => {
@@ -100,31 +101,47 @@ const Profile = () => {
             </>
           ) : (
             <form onSubmit={handleUpdateProfile} className="edit-profile-form">
+              <h3 className="edit-profile-title">Edit Your Profile</h3>
               <div className="form-group">
-                <label>First Name</label>
+                <label htmlFor="firstName" className="form-label">
+                  First Name
+                </label>
                 <input
+                  id="firstName"
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  className="form-input"
+                  placeholder="Enter your first name"
                 />
               </div>
               <div className="form-group">
-                <label>Phone</label>
+                <label htmlFor="phone" className="form-label">
+                  Phone
+                </label>
                 <input
+                  id="phone"
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                  className="form-input"
+                  placeholder="Enter your phone number"
                 />
               </div>
               <div className="form-group">
-                <label>Password</label>
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
                 <input
+                  id="password"
                   type="password"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                     setPasswordChanged(true);
                   }}
+                  className="form-input"
+                  placeholder="Enter a new password"
                 />
               </div>
               <div className="button-group">
@@ -155,9 +172,6 @@ const Profile = () => {
             <option value="out">I’m Out</option>
           </select>
         </div>
-
-       
-        
       </div>
     </div>
   );

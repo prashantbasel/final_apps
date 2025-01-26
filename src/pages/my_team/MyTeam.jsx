@@ -20,8 +20,25 @@ const PlayerCard = ({ player }) => {
             className={`card ${isDragging ? "dragging" : ""}`}
             style={{ opacity: isDragging ? 0.5 : 1 }}
         >
-            <span className="name">{player.name || "No Name"}</span>
-            <span className="phone">{player.phone || "No Phone"}</span>
+            {/* Avatar Section */}
+            <div className="avatar-container">
+                <img
+                    className="avatar"
+                    src="/assets/icons/avatar.png"
+                    alt="Player Avatar"
+                />
+                <span
+                    className={`availability-dot ${
+                        player.isAvailable ? "green" : "red"
+                    }`}
+                ></span>
+            </div>
+
+            {/* Player Info */}
+            <div className="player-info">
+                <span className="name">{player.name || "No Name"}</span>
+                <span className="phone">{player.phone || "No Phone"}</span>
+            </div>
         </div>
     );
 };
@@ -61,6 +78,7 @@ const MyTeam = () => {
     const [defender, setDefender] = useState([]);
     const [winger, setWinger] = useState([]);
     const [forward, setForward] = useState([]);
+    const [successPopup, setSuccessPopup] = useState(false);
 
     useEffect(() => {
         const fetchFriends = async () => {
@@ -71,7 +89,12 @@ const MyTeam = () => {
                         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
                     }
                 );
-                setFriendsList(response.data.friends);
+                setFriendsList(
+                    response.data.friends.map((friend) => ({
+                        ...friend,
+                        isAvailable: Math.random() > 0.5, // Simulating availability for demo
+                    }))
+                );
             } catch (error) {
                 console.error("Error fetching friends:", error);
             }
@@ -81,7 +104,6 @@ const MyTeam = () => {
     }, []);
 
     const handleDrop = (role, player) => {
-        // Add the player to the target role
         if (role === "goalkeeper" && !goalKeeper.some((p) => p.id === player.id)) {
             setGoalKeeper([player]);
         } else if (role === "defender" && !defender.some((p) => p.id === player.id)) {
@@ -92,11 +114,24 @@ const MyTeam = () => {
             setForward([player]);
         }
 
-        // Remove the player from other role boxes
         if (role !== "goalkeeper") setGoalKeeper((prev) => prev.filter((p) => p.id !== player.id));
         if (role !== "defender") setDefender((prev) => prev.filter((p) => p.id !== player.id));
         if (role !== "winger") setWinger((prev) => prev.filter((p) => p.id !== player.id));
         if (role !== "forward") setForward((prev) => prev.filter((p) => p.id !== player.id));
+    };
+
+    const handleSaveTeam = () => {
+        const team = {
+            goalKeeper,
+            defender,
+            winger,
+            forward,
+        };
+
+        console.log("Team saved:", team);
+
+        setSuccessPopup(true);
+        setTimeout(() => setSuccessPopup(false), 3000);
     };
 
     return (
@@ -139,6 +174,19 @@ const MyTeam = () => {
                         />
                     </div>
                 </div>
+                <button className="save-button" onClick={handleSaveTeam}>
+                    Save Team
+                </button>
+
+                {successPopup && (
+                    <div className="success-popup">
+                        <div className="popup-content">
+                            <div className="popup-icon">✔</div>
+                            <h2>Success</h2>
+                            <p>Team saved successfully!</p>
+                        </div>
+                    </div>
+                )}
             </div>
         </DndProvider>
     );

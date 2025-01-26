@@ -68,4 +68,77 @@
   .btn--played:hover {
     background-color: #1e8449;
   }
+  .badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+  }
   
+  .badge--played {
+    background-color: #28a745; /* Green */
+  }
+  
+  .btn--cancel {
+    background-color: #dc3545; /* Red */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .btn--cancel:hover {
+    background-color: #c82333;
+  }
+  /* Custom Modal Styles */
+.custom-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: #f4f4f4;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.btn--no {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn--no:hover {
+  background-color: #0056b3;
+}
+
+.btn--yes {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn--yes:hover {
+  background-color: #c82333;
+}

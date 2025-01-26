@@ -1,5 +1,3 @@
-/* Dashboard.css */
-
 /* Dashboard container layout */
 .Dashboard-container {
     display: flex;
@@ -7,37 +5,37 @@
     min-height: 100vh;
     background-color: #f9f9f9;
     font-family: sans-serif;
+    margin-top: 30px;
+  
 }
 
-/* Content area that holds the main image */
-.content {
-    flex: 1;
+/* Carousel styling */
+.carousel {
+    width: 100%; /* Adjusts the carousel width */
+   
+    max-width: 1600px; /* Ensures the carousel doesn't stretch too much on large screens */
+    max-height: 500px; /* Ensures a good height for images */
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Centers image vertically */
-    padding: 2rem 0;
+    justify-content: center; /* Centers the image horizontally */
+    align-items: center; /* Centers the image vertically */
+    margin-bottom: -20px;
 }
 
-/* Main section for the image */
-.main-section {
-    max-width: 1000px;
-    width: 90%;
-    /* Responsive scaling */
-    position: relative;
-    text-align: center;
-    /* Centers content */
+.carousel .carousel-inner {
+    width: 100%; /* Ensures the inner content takes full width */
 }
 
-/* Main image */
-.main-image {
-    display: block;
-    margin: 0 auto;
-    /* Centers image horizontally */
+.carousel .carousel-inner img {
     width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    height: 450px; /* Uniform height for images */
+    object-fit: cover; /* Ensures the images are well-fitted and scaled */
+}
+
+.carousel .carousel-caption {
+    background: rgba(0, 0, 0, 0.6); /* Adds a semi-transparent background for captions */
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 /* Bottom navigation bar */
@@ -48,6 +46,8 @@
     padding: 1.5rem;
     background-color: #fff;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem; /* Adds spacing between the carousel and buttons */
+    flex-wrap: wrap; /* Ensures buttons wrap to the next line if necessary */
 }
 
 /* Each navigation item (clickable) */
@@ -56,30 +56,33 @@
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    /* Removes underline from <a> */
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+    margin: 1rem; /* Adds spacing between navigation items */
 }
 
 .nav-item:hover {
-    transform: scale(1.1);
-    /* Slightly enlarges the item on hover */
+    transform: scale(1.1); /* Slightly enlarges the item on hover */
 }
 
 /* Larger icons */
 .nav-icon {
-    width: 180px;
-    height: 120px;
+    width: 150px;
+    height: 80px;
     margin-bottom: 0.5rem;
+    
     background: linear-gradient(135deg, #9fe8e2, #98ee99);
     border-radius: 12px;
     padding: 10px;
     object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Navigation labels */
 .nav-item p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #333;
     margin: 0;
@@ -87,35 +90,21 @@
 
 /* Make the nav items scale slightly when hovered */
 .nav-item:hover .nav-icon {
-    background: linear-gradient(135deg, #98ee99, #9fe8e2);
-    /* Color flip on hover */
+    background: linear-gradient(135deg, #98ee99, #9fe8e2); /* Color flip on hover */
 }
 
-/* Main section for the image */
-.main-section {
-    max-width: 800px;
-    /* Reduce the max width */
-    width: 80%;
-    /* Ensure it scales within the parent container */
-    position: relative;
-    text-align: center;
-    /* Centers content horizontally */
-    margin: 0 auto;
-    /* Centers the section itself */
-    padding: 1rem 0;
-    /* Reduce vertical spacing */
-}
+/* Media queries for responsiveness */
+@media (max-width: 1000px) {
+    .carousel .carousel-inner img {
+        height: 500px; /* Adjusts carousel image height for smaller screens */
+    }
 
-/* Main image */
-.main-image {
-    width: 100%;
-    /* Keep it responsive */
-    max-height: 400px;
-    /* Limit the vertical space it occupies */
-    height: auto;
-    /* Maintain aspect ratio */
-    border-radius: 12px;
-    /* Optional rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    /* Shadow for aesthetic */
+    .nav-icon {
+        width: 120px;
+        height: 80px; /* Adjusts icon size for smaller screens */
+    }
+
+    .nav-item p {
+        font-size: 0.9rem; /* Reduces text size for better fit */
+    }
 }

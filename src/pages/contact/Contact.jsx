@@ -38,7 +38,7 @@ const Contact = () => {
                     <p><strong>Address:</strong> Sitapaila, Kathmandu 44600</p>
                     <p><strong>Phone:</strong> (+977) 1 4000000</p>
                     <p><strong>Cell:</strong> (+977) 9851000000, 9810000000</p>
-                    <p><strong>Email:</strong> info@motomaintain.com</p>
+                    <p><strong>Email:</strong> info@Kickoff.com</p>
                     <p>Kickoff is the only page for One Futsal, which is located in Sitapaila.</p>
                 </div>
 

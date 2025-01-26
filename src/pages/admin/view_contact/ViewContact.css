@@ -1,62 +1,116 @@
+/* General Layout */
 .view-contact-container {
-    width: 90%;
-    margin: 40px auto; /* Adequate spacing from other elements */
-    padding: 20px;
-    background: #fff; /* Clean, neutral background */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
 }
 
 .view-contact-header {
-    color: #333; /* Subdued text color for readability */
-    margin-bottom: 30px; /* Spacing from header to table */
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.view-contact-header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+}
+
+/* Grid Layout */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Table Section */
+.table-section {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
 }
 
 .view-table-container {
-    width: 100%; /* Ensures the table fills the container */
-    overflow-x: auto; /* Handles responsiveness */
+    overflow-x: auto;
 }
 
 .view-styled-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px; /* Space before the button */
-}
-
-.view-styled-table thead {
-    background-color: #009879; /* Stylish header background */
-    color: #ffffff; /* Contrast for text */
+    margin-top: 1rem;
 }
 
 .view-styled-table th,
 .view-styled-table td {
-    padding: 12px 15px; /* Comfortable cell padding */
-    text-align: left; /* Aligns text to the left */
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: left;
 }
 
-.view-styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3; /* Zebra striping for rows */
-}
-
-.view-styled-table tbody tr:hover {
-    background-color: #e0e0e0; /* Hover effect for rows */
-}
-
-.view-back-button {
-    padding: 10px 20px;
-    background-color: #5c67f2; /* Distinct button color */
-    border: none;
+.view-styled-table th {
+    background-color: #3498db;
     color: white;
+}
+
+.view-styled-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.view-styled-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Chart Section */
+.chart-section {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.chart-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Back Button */
+.view-back-button {
+    margin-top: 2rem;
+    background-color: #1e88e5;
+    color: white;
+    border: none;
     border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    align-self: center; /* Center aligns the button */
-    margin-top: 10px; /* Space between table and button */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .view-back-button:hover {
-    background-color: #4a50e0; /* Hover color change */
+    background-color: #1565c0;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .view-styled-table th,
+    .view-styled-table td {
+        font-size: 0.9rem;
+    }
 }

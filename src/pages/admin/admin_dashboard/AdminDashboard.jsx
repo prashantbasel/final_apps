@@ -1,63 +1,94 @@
-
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { deleteProduct, getAllProducts } from '../../../apis/Api';
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
+import React from 'react';
+import { Bar, Line } from 'react-chartjs-2';
+import { FaChartBar, FaClipboardList, FaEye, FaSignOutAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 
+// Register Chart.js components
+ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend);
+
 const AdminDashboard = () => {
-    const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        getAllProducts().then((res) => {
-            setProducts(res.data.product);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, []);
+    // Data for the charts
+    const lineData = {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        datasets: [
+            {
+                label: 'Earnings (Nrs)',
+                data: [10000, 5000, 6000, 5000, 6000, 5000, 12000],
+                borderColor: '#1e88e5',
+                backgroundColor: 'rgba(30, 136, 229, 0.2)',
+                tension: 0.4,
+            },
+        ],
+    };
 
-    const handleDelete = (id) => {
-        if (window.confirm('Are you sure want to delete this product?')) {
-            deleteProduct(id).then((res) => {
-                if (res.status === 201) {
-                    toast.success(res.data.message);
-                    window.location.reload();
-                }
-            }).catch((error) => {
-                toast.error("Error: " + error.response.data.message);
-            });
-        }
+    const barData = {
+        labels: ['july', 'august', 'september', 'october', 'november', 'december', 'january'],
+        datasets: [
+            {
+                label: 'Revenue (Nrs)',
+                data: [500000, 600000, 400000, 700000, 800000, 900000, 100000],
+                backgroundColor: '#1e88e5',
+            },
+        ],
     };
 
     return (
-        <div className='admin-container'>
-            <h3>Admin Dashboard</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Category</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map(product => (
-                        <tr key={product._id}>
-                            <td>{product.productName}</td>
-                            <td>{product.productCategory}</td>
-                            <td>
-                                <Link to={`/admin/update/${product._id}`} className="edit-btn">Edit</Link>
-                                <button onClick={() => handleDelete(product._id)} className="delete-btn">Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <button className='view-contact-btn' onClick={() => navigate('/admin/view-contact')}>View Contacts</button>
-            <button className="add-product-btn" onClick={() => navigate('/admin/add-product')}>Add product</button>
-            <button className='view-booking-btn' onClick={() => navigate('/admin/view-booking')}>View Bookings</button>
-            <button className="logout-btn" onClick={() => navigate('/login')}>Logout</button>
+        <div className="dashboard-container">
+            {/* Sidebar */}
+            <aside className="sidebar">
+                <h2 className="logo">Admin Panel</h2>
+                <nav>
+                    <ul>
+                        <li onClick={() => navigate('/admin/dashboard')}>
+                            <FaChartBar className="icon" /> Dashboard
+                        </li>
+                        <li onClick={() => navigate('/admin/view-contact')}>
+                            <FaClipboardList className="icon" /> View Contacts
+                        </li>
+                        <li onClick={() => navigate('/admin/view-booking')}>
+                            <FaEye className="icon" /> View Bookings
+                        </li>
+                        <li onClick={() => navigate('/login')}>
+                            <FaSignOutAlt className="icon" /> Log Out
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            {/* Main Dashboard Content */}
+            <main className="main-content">
+                <header className="dashboard-header">
+                    <h1>Admin Dashboard</h1>
+                </header>
+
+                <div className="dashboard-grid">
+                    {/* Line Chart */}
+                    <div className="card">
+                        <h3>Weekly Earnings</h3>
+                        <Line data={lineData} />
+                    </div>
+
+                    {/* Bar Chart */}
+                    <div className="card">
+                        <h3>Monthly Revenue</h3>
+                        <Bar data={barData} />
+                    </div>
+
+                    {/* Placeholder for other metrics */}
+                    <div className="card">
+                        <h3>Overview</h3>
+                        <div className="chart-placeholder">32%</div>
+                    </div>
+                    <div className="card">
+                        <h3>Overview</h3>
+                        <div className="chart-placeholder">45%</div>
+                    </div>
+                </div>
+            </main>
         </div>
     );
 };
